@@ -5,9 +5,9 @@
 
 ## Contato Professor da Disciplina 
 ##### 👨‍🏫 Nome: Frank Willian Cardoso de Oliveira
-##### 📧 **
+##### 📧 frank.willian@ifpr.edu.br
 ##### 📱 ZAP +55 (44) 99834-1617
-##### ⚓ https://ava.ifpr.edu.br/course/view.php?id=10022
+##### ⚓ https://github.com/frankwco
 
 ## Dias de Atendimento
 * 🗨️ Terça-feira 18:00 às 19:00
