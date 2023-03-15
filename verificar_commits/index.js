@@ -1,50 +1,92 @@
-const form = document.querySelector('form')
-form.addEventListener('submit', function (event) {
-    event.preventDefault();
-    const repositorio = document.querySelector('#repositorio').value;
-    const dataInicial = document.querySelector('#dataInicial').value;
-    const dataFinal = document.querySelector('#dataFinal').value;
-    buscarCommits(repositorio, dataInicial, dataFinal);
+const form = document.querySelector("form");
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
+  const repositorio = document.querySelector("#repositorio").value;
+  const dataInicial = document.querySelector("#dataInicial").value;
+  const dataFinal = document.querySelector("#dataFinal").value;
+  buscarCommits(repositorio, dataInicial, dataFinal);
 });
 
 function buscarCommits(repositorio, dataInicial, dataFinal) {
-    const array = repositorio.split('/');
-    let url = '';
-    if (array.length > 2) {
-        url = `https://api.github.com/repos/${array[4] + '/' + array[5]}/commits?since=${dataInicial}&until=${dataFinal}`;
-    } else {
-        url = `https://api.github.com/repos/${array[0] + '/' + array[1]}/commits?since=${dataInicial}&until=${dataFinal}`;
-    }
-    console.log(url);
-    // fetch(url).then(response => response.json()).then(commits => {
-    //     contarCommits(commits);
-    // }).catch(error =>{
-    //     console.log(error);
-    // });
+  const array = repositorio.split("/");
+  let url = "";
+  if (array.length > 2) {
+    url = `https://api.github.com/repos/${
+      array[3] + "/" + array[4]
+    }/commits?since=${dataInicial}&until=${dataFinal}`;
+  } else {
+    url = `https://api.github.com/repos/${
+      array[0] + "/" + array[1]
+    }/commits?since=${dataInicial}&until=${dataFinal}`;
+  }
+  fetch(url)
+    .then((response) => response.json())
+    .then((commits) => {
+      contarCommits(commits);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 function contarCommits(commits) {
-    const commitsPorDia = {};
-    commits.forEach(element => {
-        const dataCommit = element.commit.author.date.substring(0, 10);
-        if (commitsPorDia[dataCommit]) {
-            commitsPorDia[dataCommit].quantidade++;
-        } else {
-            commitsPorDia[dataCommit] = {quantidade: 1, data: dataCommit};
-        }
-    });
-
-    const commitsPorDiaArray = Object.keys(commitsPorDia).map(dataCommits => {
-        return {data: dataCommits, quantidade: commitsPorDia[dataCommits].quantidade};
-    });
-    mostrarTela(commitsPorDiaArray);
-
-    function mostrarTela(commits) {
-        const dados = document.querySelector('#dados');
-        commits.forEach(element => {
-            const h1 = document.createElement('h1');
-            h1.innerHTML = element.data + ' - ' + element.quantidade;
-            dados.appendChild(h1);
-        })
+  const commitsPorDia = {};
+  commits.forEach((element) => {
+    const dataCommit = element.commit.author.date.substring(0, 10);
+    if (commitsPorDia[dataCommit]) {
+      commitsPorDia[dataCommit].quantidade++;
+    } else {
+      commitsPorDia[dataCommit] = { quantidade: 1, data: dataCommit };
     }
+  });
+
+  const commitsPorDiaArray = Object.keys(commitsPorDia).map((dataCommits) => {
+    return {
+      data: dataCommits,
+      quantidade: commitsPorDia[dataCommits].quantidade,
+    };
+  });
+  mostrarTela(commitsPorDiaArray);
+
+  function mostrarTela(commits) {
+    // const dados = document.querySelector("#dados");
+    const tabela = document.querySelector("#dados");
+    tabela.innerHTML = [
+      "<table border='1'>",
+      "<tr>",
+      "<th colspan='2'>Tabela Commits</th>",
+      "</tr>",
+      "<tr>",
+      "<th>Data</th>",
+      " <th>Commits</th>",
+      "</tr>",
+      "<tr>",
+      "<td>data</td>",
+      "<td>commits</td>",
+      "</tr>",
+      "</table>",
+    ].join("\n");
+
+    commits.forEach((element) => {
+    //   const h1 = document.createElement("h1");
+
+    //   const tabela = document.createElement("table");
+    //   const cabecalho = document.createElement("th");
+    //   const linha = document.createElement("tr");
+    //   const coluna = document.createElement("td");
+
+    //   linha.innerHTML = cabecalho((colspan = "2")) + "Tabela Commits";
+    //   linha.innerHTML = cabecalho("Data");
+    //   linha.innerHTML = cabecalho("Commits");
+    //   coluna.innerHTML = element.data;
+    //   coluna.innerHTML = element.quantidade;
+
+    //   linha.appendChild(cabecalho);
+    //   linha.appendChild(coluna);
+    //   tabela.appendChild(linha);
+
+    //   h1.innerHTML = element.data + " - " + element.quantidade;
+    //   dados.appendChild(h1);
+    });
+  }
 }
