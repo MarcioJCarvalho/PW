@@ -8,10 +8,19 @@ form.addEventListener('submit', function (event) {
 });
 
 function buscarCommits(repositorio, dataInicial, dataFinal) {
-    const url = `https://api.github.com/repos/${repositorio}/commits?since=${dataInicial}&until=${dataFinal}`;
-    fetch(url).then(response => response.json()).then(commits => {
-        contarCommits(commits);
-    });
+    const array = repositorio.split('/');
+    let url = '';
+    if (array.length > 2) {
+        url = `https://api.github.com/repos/${array[4] + '/' + array[5]}/commits?since=${dataInicial}&until=${dataFinal}`;
+    } else {
+        url = `https://api.github.com/repos/${array[0] + '/' + array[1]}/commits?since=${dataInicial}&until=${dataFinal}`;
+    }
+    console.log(url);
+    // fetch(url).then(response => response.json()).then(commits => {
+    //     contarCommits(commits);
+    // }).catch(error =>{
+    //     console.log(error);
+    // });
 }
 
 function contarCommits(commits) {
@@ -26,16 +35,15 @@ function contarCommits(commits) {
     });
 
     const commitsPorDiaArray = Object.keys(commitsPorDia).map(dataCommits => {
-        return {data:dataCommits, quantidade: commitsPorDia[dataCommits].quantidade};
+        return {data: dataCommits, quantidade: commitsPorDia[dataCommits].quantidade};
     });
     mostrarTela(commitsPorDiaArray);
-    //console.log(commitsPorDiaArray);
 
-    function mostrarTela(commits){
+    function mostrarTela(commits) {
         const dados = document.querySelector('#dados');
         commits.forEach(element => {
             const h1 = document.createElement('h1');
-            h1.innerHTML = element.data+' - '+element.quantidade;
+            h1.innerHTML = element.data + ' - ' + element.quantidade;
             dados.appendChild(h1);
         })
     }
