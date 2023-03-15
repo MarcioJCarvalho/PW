@@ -2,6 +2,7 @@
 
 ## Atividades
 * [Página de Recibo (14/03 às 19h)](https://github.com/MarcioJCarvalho/PW/tree/main/recibo_aluguel), confira [aqui.](https://github.com/MarcioJCarvalho/marciojcarvalho.github.io)
+* [Verificação de commits (21/03 às 19h)](https://github.com/MarcioJCarvalho/PW/tree/main/verificar_commits)
 
 ## Contato Professor da Disciplina 
 ##### 👨‍🏫 Nome: Frank Willian Cardoso de Oliveira
