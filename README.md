@@ -17,3 +17,6 @@
 ## Moodle
 * 📖 [PW](https://ava.ifpr.edu.br/course/view.php?id=10022)
 
+---
+Made with :blue_heart: by MÁRCIO :wave: [See my LinkedIn](https://www.linkedin.com/in/marciojcarvalho/);
+
