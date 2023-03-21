@@ -1,7 +1,7 @@
 <h1 align="center">Programação WEB</h1>
 
 ## Atividades
-* [Página de Recibo (14/03 às 19h)](https://github.com/MarcioJCarvalho/PW/tree/main/recibo_aluguel), confira [aqui.](https://github.com/MarcioJCarvalho/marciojcarvalho.github.io)
+* [Página de Recibo (14/03 às 19h)](https://github.com/MarcioJCarvalho/PW/tree/main/recibo_aluguel)
 * [Verificação de commits (21/03 às 19h)](https://github.com/MarcioJCarvalho/PW/tree/main/verificar_commits)
 
 ## Contato Professor da Disciplina 
