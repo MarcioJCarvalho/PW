@@ -11,13 +11,11 @@ function buscarCommits(repositorio, dataInicial, dataFinal) {
   const array = repositorio.split("/");
   let url = "";
   if (array.length > 2) {
-    url = `https://api.github.com/repos/${
-      array[3] + "/" + array[4]
-    }/commits?since=${dataInicial}&until=${dataFinal}`;
+    url = `https://api.github.com/repos/${array[3] + "/" + array[4]
+      }/commits?since=${dataInicial}&until=${dataFinal}`;
   } else {
-    url = `https://api.github.com/repos/${
-      array[0] + "/" + array[1]
-    }/commits?since=${dataInicial}&until=${dataFinal}`;
+    url = `https://api.github.com/repos/${array[0] + "/" + array[1]
+      }/commits?since=${dataInicial}&until=${dataFinal}`;
   }
   fetch(url)
     .then((response) => response.json())
@@ -33,10 +31,11 @@ function contarCommits(commits) {
   const commitsPorDia = {};
   commits.forEach((element) => {
     const dataCommit = element.commit.author.date.substring(0, 10);
+    const mensagemCommit = element.commit.message;
     if (commitsPorDia[dataCommit]) {
       commitsPorDia[dataCommit].quantidade++;
     } else {
-      commitsPorDia[dataCommit] = { quantidade: 1, data: dataCommit };
+      commitsPorDia[dataCommit] = { quantidade: 1, data: dataCommit, mensagem: mensagemCommit};
     }
   });
 
@@ -44,49 +43,51 @@ function contarCommits(commits) {
     return {
       data: dataCommits,
       quantidade: commitsPorDia[dataCommits].quantidade,
+      mensagem: commitsPorDia[dataCommits].mensagem,
     };
   });
   mostrarTela(commitsPorDiaArray);
+}
 
-  function mostrarTela(commits) {
-    // const dados = document.querySelector("#dados");
-    const tabela = document.querySelector("#dados");
-    tabela.innerHTML = [
-      "<table border='1'>",
-      "<tr>",
-      "<th colspan='2'>Tabela Commits</th>",
-      "</tr>",
-      "<tr>",
-      "<th>Data</th>",
-      " <th>Commits</th>",
-      "</tr>",
-      "<tr>",
-      "<td>data</td>",
-      "<td>commits</td>",
-      "</tr>",
-      "</table>",
-    ].join("\n");
+function mostrarTela(commits) {
+  const dados = document.querySelector("#dados");
+  const table = document.createElement("table");
+  const thTable = document.createElement("th");
+  const thData = document.createElement("th");
+  const thCommit = document.createElement("th");
+  const thMensagem = document.createElement("th");
+  const trTable = document.createElement("tr");
+  const trHeader = document.createElement("tr");
+  const tbody = document.createElement("tbody");
 
-    commits.forEach((element) => {
-    //   const h1 = document.createElement("h1");
+  thTable.innerHTML = "Tabela Commits";
+  thTable.colSpan = 3;
+  trTable.appendChild(thTable);
+  table.appendChild(trTable);
+  thData.innerHTML = 'Data';
+  table.appendChild(trHeader);
+  thCommit.innerHTML = 'Commits';
+  thMensagem.innerHTML = 'Mensagem';
+  trHeader.appendChild(thData);
+  trHeader.appendChild(thCommit);
+  trHeader.appendChild(thMensagem);
 
-    //   const tabela = document.createElement("table");
-    //   const cabecalho = document.createElement("th");
-    //   const linha = document.createElement("tr");
-    //   const coluna = document.createElement("td");
-
-    //   linha.innerHTML = cabecalho((colspan = "2")) + "Tabela Commits";
-    //   linha.innerHTML = cabecalho("Data");
-    //   linha.innerHTML = cabecalho("Commits");
-    //   coluna.innerHTML = element.data;
-    //   coluna.innerHTML = element.quantidade;
-
-    //   linha.appendChild(cabecalho);
-    //   linha.appendChild(coluna);
-    //   tabela.appendChild(linha);
-
-    //   h1.innerHTML = element.data + " - " + element.quantidade;
-    //   dados.appendChild(h1);
+  commits.forEach((element) => {
+    const data = new Date(element.data).toLocaleDateString('pt-BR', {
+      timeZone: 'UTC'
     });
-  }
+
+    let trow = tbody.insertRow(tbody);
+
+    const tData = trow.insertCell();
+    tData.innerText = data;
+
+    const tCommit = trow.insertCell();
+    tCommit.innerText = element.quantidade;
+
+    const tMensagem = trow.insertCell();
+    tMensagem.innerText = element.mensagem;
+  });
+  table.appendChild(tbody);
+  dados.appendChild(table);
 }
