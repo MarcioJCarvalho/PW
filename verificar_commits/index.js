@@ -34,8 +34,9 @@ function contarCommits(commits) {
     const mensagemCommit = element.commit.message;
     if (commitsPorDia[dataCommit]) {
       commitsPorDia[dataCommit].quantidade++;
+      commitsPorDia[dataCommit].mensagem.push(mensagemCommit);
     } else {
-      commitsPorDia[dataCommit] = { quantidade: 1, data: dataCommit, mensagem: mensagemCommit};
+      commitsPorDia[dataCommit] = { quantidade: 1, data: dataCommit, mensagem: [mensagemCommit]};
     }
   });
 
@@ -86,7 +87,12 @@ function mostrarTela(commits) {
     tCommit.innerText = element.quantidade;
 
     const tMensagem = trow.insertCell();
-    tMensagem.innerText = element.mensagem;
+    element.mensagem.forEach(mensagens =>{
+      const msg = document.createTextNode(mensagens);
+      const li = document.createElement('li');
+      li.appendChild(msg);
+      tMensagem.appendChild(li);
+    });
   });
   table.appendChild(tbody);
   dados.appendChild(table);
