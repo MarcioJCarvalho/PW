@@ -15,8 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping( "/commits")
 public class CommitController {
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping(value = "teste")
+    @PostMapping
     public void cadastrar(@RequestBody CommitDTO commitDTO){
-        commitDTO.toString();
     }
 }
