@@ -1,16 +1,22 @@
 package io.github.marciojcarvalho.api_pw.controller;
 
+import io.github.marciojcarvalho.api_pw.controller.dto.CommitDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RestController
-@RequestMapping(value = "/commits")
+@RequestMapping( "/commits")
 public class CommitController {
-
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "teste")
+    public void cadastrar(@RequestBody CommitDTO commitDTO){
+        commitDTO.toString();
+    }
 }

@@ -1,1 +1,4 @@
 io\github\marciojcarvalho\api_pw\ApiPwApplication.class
+io\github\marciojcarvalho\api_pw\controller\entity\Commit.class
+io\github\marciojcarvalho\api_pw\controller\CommitController.class
+io\github\marciojcarvalho\api_pw\controller\dto\CommitDTO.class
