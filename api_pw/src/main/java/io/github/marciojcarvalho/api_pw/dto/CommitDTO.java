@@ -1,6 +1,6 @@
-package io.github.marciojcarvalho.api_pw.controller.dto;
+package io.github.marciojcarvalho.api_pw.dto;
 
-import io.github.marciojcarvalho.api_pw.controller.entity.Commit;
+import io.github.marciojcarvalho.api_pw.entity.Commit;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

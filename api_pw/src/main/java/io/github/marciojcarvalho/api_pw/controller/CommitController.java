@@ -1,9 +1,7 @@
 package io.github.marciojcarvalho.api_pw.controller;
 
-import io.github.marciojcarvalho.api_pw.controller.dto.CommitDTO;
-import lombok.AllArgsConstructor;
+import io.github.marciojcarvalho.api_pw.dto.CommitDTO;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
