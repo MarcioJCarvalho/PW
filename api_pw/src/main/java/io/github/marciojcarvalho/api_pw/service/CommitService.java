@@ -5,4 +5,5 @@ import org.springframework.http.ResponseEntity;
 
 public interface CommitService {
     CommitDTO cadastrar(CommitDTO commitDTO);
+    void excluir(Long id);
 }

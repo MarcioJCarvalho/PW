@@ -3,11 +3,11 @@ package io.github.marciojcarvalho.api_pw.service;
 import io.github.marciojcarvalho.api_pw.dto.CommitDTO;
 import io.github.marciojcarvalho.api_pw.entity.Commit;
 import io.github.marciojcarvalho.api_pw.repository.CommitRepository;
-import io.swagger.v3.oas.annotations.servers.Server;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
-@Server
+
+@Service
 @RequiredArgsConstructor
 public class CommitServiceImpl implements CommitService{
     private final CommitRepository commitRepository;
@@ -16,5 +16,10 @@ public class CommitServiceImpl implements CommitService{
         Commit commit = new Commit();
         commit = commit.converter(commitDTO);
         return commitDTO.converter(commitRepository.save(commit));
+    }
+
+    @Override
+    public void excluir(Long id) {
+        commitRepository.deleteById(id);
     }
 }
